@@ -1,0 +1,8 @@
+0. "source env/bin/activate" to activate env in config folder
+
+1. Create mySql account, in intailize_database_and_Tables.py rename "MYSQL_DATABASE_TO_BE_CREATED" on line 13 to your prefered database name
+
+2. In reintialize_mysql_tables.py line 13 rename MYSQL_EXISTING_DATABASE_NAME to your prefered database name
+
+3. run python3 download_equity_stock_data.py, if database not already created change "DATABASE_NOT_CREATED" to true otherwise false.
+

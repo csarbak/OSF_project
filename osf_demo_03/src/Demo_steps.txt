@@ -1,0 +1,3 @@
+Run Correspoing client and server, make sure ports and server locations are correct at top of every file. 
+
+1.  In osf_dbs_server.py line 13 rename MYSQL_EXISTING_DATABASE_NAME to correct data base name  

@@ -1,0 +1,90 @@
+{% extends "layout.jinja2" %}
+
+{% block pagestyles %}
+  <link href="{{ url_for('static', filename='dist/css/account.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+  <div class="form-wrapper">
+
+    <div class="logo">
+      <img src="{{ url_for('static', filename='dist/img/logo.png') }}" alt="logo"/>
+    </div>
+
+    {% for message in get_flashed_messages() %}
+      <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+      </div>
+    {% endfor %}
+
+    <h1>Symbol</h1>
+
+    <form method="POST" action="/symbol">
+      {{ form.csrf_token }}
+
+      <fieldset class="exchange_name">
+        {{ form.exchange_name.label }} {{ form.exchange_name }}
+        {% if form.exchange_name.errors %}
+          <ul class="errors">
+            {% for error in form.exchange_name.errors %}
+              <li>{{ error }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+      </fieldset>
+
+      <fieldset class="symbol">
+        {{ form.symbol.label }} {{ form.symbol }}
+        {% if form.symbol.errors %}
+          <ul class="errors">
+            {% for error in form.symbol.errors %}
+              <li>{{ error }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+      </fieldset>
+
+
+      <div class="submit-button">
+        {{ form.submit }}
+      </div>
+
+    </form>
+
+    {% for tuple in results %}
+      <p>{{ tuple }}!</p>
+    {% endfor %}
+    
+    <div class="login-signup">
+      <span>Already have an account? <a href="{{ url_for('auth_bp.login') }}">Log in.</a></span>
+    </div>
+  </div>
+{% endblock %}
+
+
+{% block  additionalscripts %}
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var symbolChoices = {{ symbol_choices|tojson }};
+        
+        function updateSymbolChoices(selectedExchange) {
+            var symbolField = $('[name="symbol"]');
+            symbolField.empty();
+            
+            var choices = symbolChoices[selectedExchange];
+            for (var i = 0; i < choices.length; i++) {
+                var option = $('<option>').val(choices[i][0]).text(choices[i][1]);
+                symbolField.append(option);
+            }
+        }
+        
+        $('[name="exchange_name"]').change(function() {
+            var selectedExchange = $(this).val();
+            updateSymbolChoices(selectedExchange);
+        });
+        
+        var selectedExchange = $('[name="exchange_name"]').val();
+        updateSymbolChoices(selectedExchange);
+    });
+</script>
+{% endblock %}

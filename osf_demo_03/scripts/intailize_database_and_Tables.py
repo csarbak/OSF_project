@@ -23,7 +23,7 @@ def create_server_connection(host_name, user_name, user_password):
             host=host_name,
             user=user_name,
             passwd=user_password,
-            port = PORT
+            port = PORT,
             auth_plugin="mysql_native_password",
         )
 

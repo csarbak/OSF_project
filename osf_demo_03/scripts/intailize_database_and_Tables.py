@@ -11,6 +11,8 @@ MYSQL_USER = "conrad"
 MYSQL_HOST = "localhost"
 MYSQL_PASSWORD = "conPass"
 MYSQL_DATABASE_TO_BE_CREATED = "test1"
+PORT = 3306
+#add port argument
 
 
 # source venv/bin/activate
@@ -21,6 +23,7 @@ def create_server_connection(host_name, user_name, user_password):
             host=host_name,
             user=user_name,
             passwd=user_password,
+            port = PORT
             auth_plugin="mysql_native_password",
         )
 
@@ -44,7 +47,7 @@ def create_db_connection(host_name, user_name, user_password, db_name):
     connection = None
     try:
         connection = mysql.connector.connect(
-            host=host_name, user=user_name, passwd=user_password, database=db_name
+            host=host_name, user=user_name, passwd=user_password, database=db_name, port = PORT
         )
         print("MySQL Database connection successful")
     except Error as err:

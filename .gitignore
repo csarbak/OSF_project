@@ -1,0 +1,14 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+# **/**/pycache__/
+*.py[cod]
+
+#directories
+bp_utils/
+cpp_socket_utils/
+mysql_utils/
+.vscode/
+
+#envs
+**/**/env/
+**/**/.venv/

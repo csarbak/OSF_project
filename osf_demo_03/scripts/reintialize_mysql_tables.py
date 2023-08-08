@@ -13,12 +13,13 @@ from sys import argv
 MYSQL_EXISTING_DATABASE_NAME = "test1"
 MYSQL_USER = "conrad"
 MYSQL_PASSWORD = "conPass"
+PORT = 3600
 
 
 def replace_existing_table(dataBaseName, tableName, dataFrame, user, password):
     sqlEngine = create_engine(
         "mysql+pymysql://%s:%s@localhost/%s" % (user, password, dataBaseName),
-        pool_recycle=3600,
+        pool_recycle=PORT,
     )
     try:
         dbConnection = sqlEngine.connect()
